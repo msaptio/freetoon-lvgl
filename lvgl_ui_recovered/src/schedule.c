@@ -5,6 +5,7 @@
  * — each entry is an array of single-key objects. We hand-parse with strstr.
  */
 #include "schedule.h"
+#include "i18n.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,17 +29,17 @@ unsigned schedule_state_color(int state) {
 }
 const char * schedule_state_name(int state) {
     switch (state) {
-        case 0: return "Comfort";
-        case 1: return "Home";
-        case 2: return "Sleep";
-        case 3: return "Away";
+        case 0: return tr("Comfort", "Comfort");
+        case 1: return tr("Thuis",   "Home");
+        case 2: return tr("Slapen",  "Sleep");
+        case 3: return tr("Weg",     "Away");
         default:return "--";
     }
 }
 const char * schedule_day_short(int day) {
-    static const char * names[] = {"Mon","Tue","Wed","Thu","Fri","Sat","Sun"};
+    /* day: 0=Mon..6=Sun; i18n_day_short takes tm_wday (0=Sun). */
     if (day < 0 || day > 6) return "--";
-    return names[day];
+    return i18n_day_short((day + 1) % 7);
 }
 
 /* Which Comfort/Home/Sleep/Away program does the weekly schedule say is

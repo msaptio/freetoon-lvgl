@@ -54,6 +54,17 @@ static const metric_t metrics[6] = {
 };
 #define N_METRIC ((int)(sizeof metrics / sizeof metrics[0]))
 
+/* Display name of a metric in the UI language (metrics[].label stays the key). */
+static const char * metric_label(int i) {
+    switch (i) {
+    case 0:  return tr("Elektriciteit", "Electricity");
+    case 1:  return tr("Gas", "Gas");
+    case 2:  return tr("Water", "Water");
+    case 5:  return tr("CV bar", "CV bar");
+    default: return metrics[i].label;
+    }
+}
+
 static int      selected_metric = 0;
 static period_t selected_period = PERIOD_HOUR;
 static stats_series_t  series;
@@ -354,7 +365,7 @@ static void render_chart(void) {
 
 static void reload_and_render(void) {
     lv_chart_set_series_color(chart, cs, lv_color_hex(metrics[selected_metric].color));
-    lv_label_set_text(lbl_metric_name, metrics[selected_metric].label);
+    lv_label_set_text(lbl_metric_name, metric_label(selected_metric));
     load_for_period();
     render_chart();
 }
@@ -426,7 +437,7 @@ lv_obj_t * screen_stats_create(void) {
         lv_obj_add_flag(t, LV_OBJ_FLAG_CLICKABLE);
         lv_obj_add_event_cb(t, on_metric_tap, LV_EVENT_CLICKED, (void *)(long)i);
         lv_obj_t * lbl = lv_label_create(t);
-        lv_label_set_text(lbl, metrics[i].label);
+        lv_label_set_text(lbl, metric_label(i));
         lv_obj_set_style_text_color(lbl, lv_color_hex(0xffffff), 0);
         lv_obj_set_style_text_font(lbl, SF(18), 0);  /* 6 tabs → smaller */
         lv_obj_center(lbl);

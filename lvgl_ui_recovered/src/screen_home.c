@@ -195,11 +195,11 @@ static void set_forecast_icon(lv_obj_t * cloud, lv_obj_t * sun,
  * 12,14,18,20,22,…). Scales the forecast text when the tile is resized smaller
  * than the native full-width strip. Clamped to [12,22]. */
 static const lv_font_t * font_for(int px) {
-    if (px >= 22) return &lv_font_montserrat_22;
-    if (px >= 20) return &lv_font_montserrat_20;
-    if (px >= 18) return &lv_font_montserrat_18;
-    if (px >= 14) return &lv_font_montserrat_14;
-    return &lv_font_montserrat_12;
+    if (px >= 22) return &lv_font_ft_22;
+    if (px >= 20) return &lv_font_ft_20;
+    if (px >= 18) return &lv_font_ft_18;
+    if (px >= 14) return &lv_font_ft_14;
+    return &lv_font_ft_12;
 }
 
 /* Whole-tile pointers so refresh_cb can flip their offline labels or
@@ -1076,9 +1076,9 @@ static void vent_apply_fan_anim(int rpm) {
  * picks the largest that fits, falling back to the smallest. */
 static void fit_font(lv_obj_t * lbl, const char * txt, lv_coord_t max_w, int base_px) {
     static const struct { int px; const lv_font_t * f; } L[] = {
-        { 28, &lv_font_montserrat_28 }, { 22, &lv_font_montserrat_22 },
-        { 20, &lv_font_montserrat_20 }, { 18, &lv_font_montserrat_18 },
-        { 14, &lv_font_montserrat_14 }, { 12, &lv_font_montserrat_12 },
+        { 28, &lv_font_ft_28 }, { 22, &lv_font_ft_22 },
+        { 20, &lv_font_ft_20 }, { 18, &lv_font_ft_18 },
+        { 14, &lv_font_ft_14 }, { 12, &lv_font_ft_12 },
     };
     if (!lbl || !txt || max_w < 1) return;
     for (unsigned i = 0; i < sizeof L / sizeof L[0]; i++) {
@@ -1087,7 +1087,7 @@ static void fit_font(lv_obj_t * lbl, const char * txt, lv_coord_t max_w, int bas
         lv_txt_get_size(&sz, txt, L[i].f, 0, 0, LV_COORD_MAX, 0);
         if (sz.x <= max_w) { lv_obj_set_style_text_font(lbl, L[i].f, 0); return; }
     }
-    lv_obj_set_style_text_font(lbl, &lv_font_montserrat_12, 0);
+    lv_obj_set_style_text_font(lbl, &lv_font_ft_12, 0);
 }
 static void open_settings_action(void * ctx) {
     (void)ctx;
