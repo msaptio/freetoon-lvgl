@@ -11,6 +11,7 @@
 #include "weather.h"
 #include "http.h"
 #include "settings.h"
+#include "i18n.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -97,8 +98,10 @@ static int js_str(const char * begin, const char * end, const char * key,
     return 1;
 }
 
-/* Compute Dutch short-day label "ma 13-5" from a "2026-05-14T00:00:00" string. */
-static const char * dutch_dow[] = {"zo","ma","di","wo","do","vr","za"};
+/* Compute short-day label "ma 13-5" (FR: "lu 13-5") from a "2026-05-14T00:00:00"
+ * string. EN keeps the Dutch abbreviations, as before. */
+static const char * dutch_dow[]  = {"zo","ma","di","wo","do","vr","za"};
+static const char * french_dow[] = {"di","lu","ma","me","je","ve","sa"};
 static void format_day_label(const char * iso_date, char * out, size_t outsz) {
     if (strlen(iso_date) < 10) { snprintf(out, outsz, "?"); return; }
     int y = atoi(iso_date);
@@ -110,7 +113,8 @@ static void format_day_label(const char * iso_date, char * out, size_t outsz) {
     int K = yy % 100, J = yy / 100;
     int h = (d + (13*(mm+1))/5 + K + K/4 + J/4 + 5*J) % 7;  /* 0=Sat,1=Sun,2=Mon */
     int dow = (h + 6) % 7;  /* 0=Sun..6=Sat */
-    snprintf(out, outsz, "%s %d-%d", dutch_dow[dow], d, mo);
+    snprintf(out, outsz, "%s %d-%d",
+             settings.language == LANG_FR ? french_dow[dow] : dutch_dow[dow], d, mo);
 }
 
 /* ---- Open-Meteo: exact-point current + forecast by lat/lon -----------------
@@ -153,7 +157,7 @@ static void wmo_icon(int code, int is_day, char * out /* >=4 bytes */) {
 }
 static const char * wmo_desc(int code) {
     const struct wmo_row * w = wmo_lookup(code);
-    return settings.language ? w->en : w->nl;
+    return tr(w->nl, w->en);   /* FR via the i18n_fr.c table */
 }
 static int kmh_to_bft(double kmh) {
     static const double t[12] = {1,6,12,20,29,39,50,62,75,89,103,118};
@@ -162,8 +166,10 @@ static int kmh_to_bft(double kmh) {
 static void deg_to_nl(double deg, char * out, size_t outsz) {
     static const char * c[16] = {"N","NNO","NO","ONO","O","OZO","ZO","ZZO",
                                  "Z","ZZW","ZW","WZW","W","WNW","NW","NNW"};
+    static const char * f[16] = {"N","NNE","NE","ENE","E","ESE","SE","SSE",
+                                 "S","SSO","SO","OSO","O","ONO","NO","NNO"};
     int i = ((int)((deg + 11.25) / 22.5)) & 15;
-    snprintf(out, outsz, "%s", c[i]);
+    snprintf(out, outsz, "%s", settings.language == LANG_FR ? f[i] : c[i]);
 }
 /* index-th numeric element of  "key":[ a, b, c, ... ]  at/after begin. */
 static double js_arr_num(const char * begin, const char * key, int index, double dflt) {

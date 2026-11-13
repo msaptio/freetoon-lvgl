@@ -151,7 +151,7 @@ static void en_make_bar(lv_obj_t * parent, int w, int y, uint32_t color,
 
     *lbl = lv_label_create(parent);
     lv_obj_set_style_text_color(*lbl, lv_color_hex(color), 0);
-    lv_obj_set_style_text_font(*lbl, &lv_font_montserrat_18, 0);
+    lv_obj_set_style_text_font(*lbl, &lv_font_ft_18, 0);
     lv_label_set_text(*lbl, "");
     lv_obj_align(*lbl, LV_ALIGN_TOP_LEFT, 4, y + 13);
 }
@@ -620,7 +620,7 @@ lv_obj_t * screen_dim_grid_create(void) {
        different content widths can't drift them out of alignment. */
     lbl_date = lv_label_create(scr_root);
     lv_obj_set_style_text_color(lbl_date, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(lbl_date, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(lbl_date, &lv_font_ft_22, 0);
     lv_label_set_text(lbl_date, "");
     lv_obj_align(lbl_date, LV_ALIGN_CENTER, 0, SY(-50));
 
@@ -638,7 +638,7 @@ lv_obj_t * screen_dim_grid_create(void) {
     /* Outside-temp font grows when the weather block is made WIDER in the editor
      * (wider tile = room for a bigger, clearer temp — the tester's request). */
     int w_grow = g_dim_blocks[DB_WEATHER].w - dim_block_default(DB_WEATHER).w;
-    const lv_font_t * wtemp_font = (w_grow >= 1) ? &lv_font_montserrat_48 : &lv_font_montserrat_28;
+    const lv_font_t * wtemp_font = (w_grow >= 1) ? &lv_font_ft_48 : &lv_font_ft_28;
 
     lv_obj_t * wrow = lv_obj_create(bx_w);
     lv_obj_remove_style_all(wrow);
@@ -672,7 +672,7 @@ lv_obj_t * screen_dim_grid_create(void) {
 
     lbl_outside = lv_label_create(wcol);
     lv_obj_set_style_text_color(lbl_outside, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(lbl_outside, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(lbl_outside, &lv_font_ft_22, 0);
     lv_label_set_text(lbl_outside, tr("Buiten", "Outside"));
 
     dim_moon_img = lv_img_create(bx_w);
@@ -697,7 +697,7 @@ lv_obj_t * screen_dim_grid_create(void) {
 
     lbl_waste = lv_label_create(bx_s);
     lv_obj_set_style_text_color(lbl_waste, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(lbl_waste, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(lbl_waste, &lv_font_ft_22, 0);
     lv_obj_set_width(lbl_waste, sbw - 8);
     lv_obj_set_style_text_align(lbl_waste, LV_TEXT_ALIGN_CENTER, 0);
     lv_label_set_long_mode(lbl_waste, LV_LABEL_LONG_WRAP);
@@ -707,25 +707,25 @@ lv_obj_t * screen_dim_grid_create(void) {
     int tbw = 0, tbh = 0; lv_obj_t * bx_t = dim_box(DB_THERMO, &tbw, &tbh); (void)tbh;
     lbl_temp = lv_label_create(bx_t);
     lv_obj_set_style_text_color(lbl_temp, lv_color_hex(0xffffff), 0);
-    lv_obj_set_style_text_font(lbl_temp, t1 ? &lv_font_montserrat_28 : &lv_font_montserrat_48, 0);
+    lv_obj_set_style_text_font(lbl_temp, t1 ? &lv_font_ft_28 : &lv_font_ft_48, 0);
     lv_label_set_text(lbl_temp, "-- C");
     lv_obj_align(lbl_temp, LV_ALIGN_TOP_MID, 0, 2);
 
     lbl_setpoint = lv_label_create(bx_t);
     lv_obj_set_style_text_color(lbl_setpoint, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(lbl_setpoint, t1 ? &lv_font_montserrat_22 : &lv_font_montserrat_28, 0);
+    lv_obj_set_style_text_font(lbl_setpoint, t1 ? &lv_font_ft_22 : &lv_font_ft_28, 0);
     lv_label_set_text(lbl_setpoint, tr("naar -- C", "to -- C"));
     lv_obj_align(lbl_setpoint, LV_ALIGN_TOP_MID, 0, t1 ? 42 : 58);
 
     lbl_program = lv_label_create(bx_t);
     lv_obj_set_style_text_color(lbl_program, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(lbl_program, t1 ? &lv_font_montserrat_18 : &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(lbl_program, t1 ? &lv_font_ft_18 : &lv_font_ft_22, 0);
     lv_label_set_text(lbl_program, "--");
     lv_obj_align(lbl_program, LV_ALIGN_TOP_MID, 0, t1 ? 70 : 92);
 
     lbl_metrics = lv_label_create(bx_t);
     lv_obj_set_style_text_color(lbl_metrics, lv_color_hex(0x888888), 0);
-    lv_obj_set_style_text_font(lbl_metrics, &lv_font_montserrat_18, 0);
+    lv_obj_set_style_text_font(lbl_metrics, &lv_font_ft_18, 0);
     lv_obj_set_width(lbl_metrics, tbw - 8);
     lv_obj_set_style_text_align(lbl_metrics, LV_TEXT_ALIGN_CENTER, 0);
     lv_label_set_long_mode(lbl_metrics, LV_LABEL_LONG_CLIP);
@@ -733,7 +733,7 @@ lv_obj_t * screen_dim_grid_create(void) {
     lv_obj_align(lbl_metrics, LV_ALIGN_TOP_MID, 0, t1 ? 94 : 122);
 
     lbl_burner = lv_label_create(bx_t);
-    lv_obj_set_style_text_font(lbl_burner, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(lbl_burner, &lv_font_ft_22, 0);
     lv_label_set_text(lbl_burner, "");
     lv_obj_align(lbl_burner, LV_ALIGN_TOP_MID, 130, t1 ? 70 : 92);
     lv_obj_add_flag(lbl_burner, LV_OBJ_FLAG_HIDDEN);
@@ -772,7 +772,7 @@ lv_obj_t * screen_dim_grid_create(void) {
 
     dim_lbl_water = lv_label_create(bx_t);
     lv_obj_set_style_text_color(dim_lbl_water, lv_color_hex(0x66bbff), 0);
-    lv_obj_set_style_text_font(dim_lbl_water, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(dim_lbl_water, &lv_font_ft_22, 0);
     lv_label_set_text(dim_lbl_water, "");
     lv_obj_align(dim_lbl_water, LV_ALIGN_TOP_MID, -110, 18);
     lv_obj_add_flag(dim_lbl_water, LV_OBJ_FLAG_HIDDEN);
@@ -790,7 +790,7 @@ lv_obj_t * screen_dim_grid_create(void) {
 
     dim_vent_lbl = lv_label_create(bx_v);
     lv_obj_set_style_text_color(dim_vent_lbl, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(dim_vent_lbl, &lv_font_montserrat_18, 0);
+    lv_obj_set_style_text_font(dim_vent_lbl, &lv_font_ft_18, 0);
     lv_label_set_text(dim_vent_lbl, "-- %");
     lv_obj_set_style_text_align(dim_vent_lbl, LV_TEXT_ALIGN_CENTER, 0);
     lv_obj_set_width(dim_vent_lbl, vbw - 4);
@@ -804,7 +804,7 @@ lv_obj_t * screen_dim_grid_create(void) {
     int fbw = 0, fbh = 0; lv_obj_t * bx_f = dim_box(DB_FAMILY, &fbw, &fbh); (void)fbh;
     dim_lbl_life360_a = lv_label_create(bx_f);
     lv_obj_set_style_text_color(dim_lbl_life360_a, lv_color_hex(0x88aaff), 0);
-    lv_obj_set_style_text_font(dim_lbl_life360_a, &lv_font_montserrat_18, 0);
+    lv_obj_set_style_text_font(dim_lbl_life360_a, &lv_font_ft_18, 0);
     lv_obj_set_width(dim_lbl_life360_a, fbw - 8);
     lv_obj_set_style_text_align(dim_lbl_life360_a, LV_TEXT_ALIGN_RIGHT, 0);
     lv_label_set_long_mode(dim_lbl_life360_a, LV_LABEL_LONG_DOT);
@@ -814,7 +814,7 @@ lv_obj_t * screen_dim_grid_create(void) {
 
     dim_lbl_life360_b = lv_label_create(bx_f);
     lv_obj_set_style_text_color(dim_lbl_life360_b, lv_color_hex(0xff88cc), 0);
-    lv_obj_set_style_text_font(dim_lbl_life360_b, &lv_font_montserrat_18, 0);
+    lv_obj_set_style_text_font(dim_lbl_life360_b, &lv_font_ft_18, 0);
     lv_obj_set_width(dim_lbl_life360_b, fbw - 8);
     lv_obj_set_style_text_align(dim_lbl_life360_b, LV_TEXT_ALIGN_RIGHT, 0);
     lv_label_set_long_mode(dim_lbl_life360_b, LV_LABEL_LONG_DOT);
@@ -840,7 +840,7 @@ lv_obj_t * screen_dim_grid_create(void) {
 
         dim_fc_day[i] = lv_label_create(bx_c);
         lv_obj_set_style_text_color(dim_fc_day[i], lv_color_hex(0xbbbbbb), 0);
-        lv_obj_set_style_text_font(dim_fc_day[i], &lv_font_montserrat_18, 0);
+        lv_obj_set_style_text_font(dim_fc_day[i], &lv_font_ft_18, 0);
         lv_label_set_text(dim_fc_day[i], "");
         lv_obj_set_style_text_align(dim_fc_day[i], LV_TEXT_ALIGN_CENTER, 0);
         lv_obj_set_width(dim_fc_day[i], col_w);
@@ -849,7 +849,7 @@ lv_obj_t * screen_dim_grid_create(void) {
 
         dim_fc_temp[i] = lv_label_create(bx_c);
         lv_obj_set_style_text_color(dim_fc_temp[i], lv_color_hex(0xffffff), 0);
-        lv_obj_set_style_text_font(dim_fc_temp[i], &lv_font_montserrat_18, 0);
+        lv_obj_set_style_text_font(dim_fc_temp[i], &lv_font_ft_18, 0);
         lv_label_set_text(dim_fc_temp[i], "");
         lv_obj_set_style_text_align(dim_fc_temp[i], LV_TEXT_ALIGN_CENTER, 0);
         lv_obj_set_width(dim_fc_temp[i], col_w);

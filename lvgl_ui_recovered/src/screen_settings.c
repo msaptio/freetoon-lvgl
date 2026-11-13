@@ -538,15 +538,13 @@ static void about_tick(void) {
         toon_state.indoor_temp, toon_state.setpoint, uh, um);
 }
 
-/* Language selector — OFF = Nederlands (LANG_NL), ON = English (LANG_EN).
-   Switching takes effect on the next modal/screen build (tr() reads
+/* Language selector — dropdown Nederlands / English / Français, in lang_t
+   order. Switching takes effect on the next modal/screen build (tr() reads
    settings.language live); no restart needed. */
-static lv_obj_t * lbl_lang_val = NULL;
 static void on_language_change(lv_event_t * e) {
-    int on = lv_obj_has_state(lv_event_get_target(e), LV_STATE_CHECKED);
-    settings.language = on ? LANG_EN : LANG_NL;
-    if (lbl_lang_val)
-        lv_label_set_text(lbl_lang_val, on ? "English" : "Nederlands");
+    int sel = (int)lv_dropdown_get_selected(lv_event_get_target(e));
+    if (sel < 0 || sel >= LANG_COUNT) sel = LANG_NL;
+    settings.language = sel;
     settings_save();
 }
 
@@ -624,12 +622,21 @@ static void open_display_modal(lv_event_t * e) {
     sw_dim_bars_swap = row_switch(r, settings.dim_bars_swap, on_dim_bars_swap_change);
     y += 82;
 
-    /* Language — OFF = Nederlands, ON = English. The value label shows the
-       current choice; takes effect on the next UI build (no restart). */
-    r = panel_row(p, y, tr("Taal", "Language"), &lbl_lang_val);
-    lv_label_set_text(lbl_lang_val,
-                      settings.language == LANG_EN ? "English" : "Nederlands");
-    row_switch(r, settings.language == LANG_EN, on_language_change);
+    /* Language — Nederlands / English / Français. Takes effect on the next
+       UI build (no restart). Option names are shown in their own language. */
+    r = panel_row(p, y, tr("Taal", "Language"), NULL);
+    {
+        char opts[64];
+        snprintf(opts, sizeof opts, "%s\n%s\n%s", i18n_lang_name(LANG_NL),
+                 i18n_lang_name(LANG_EN), i18n_lang_name(LANG_FR));
+        lv_obj_t * dd = lv_dropdown_create(r);
+        lv_dropdown_set_options(dd, opts);
+        lv_dropdown_set_selected(dd, (settings.language >= 0 && settings.language < LANG_COUNT)
+                                     ? settings.language : LANG_NL);
+        lv_obj_set_width(dd, SX(240));
+        lv_obj_align(dd, LV_ALIGN_RIGHT_MID, SX(-4), 0);
+        lv_obj_add_event_cb(dd, on_language_change, LV_EVENT_VALUE_CHANGED, NULL);
+    }
     y += 82;
 
     /* Home theme — classic Toon (stock) light tile-carousel vs freetoon dark

@@ -682,7 +682,7 @@ lv_obj_t * screen_dim_create(void) {
        different content widths can't drift them out of alignment. */
     lbl_date = lv_label_create(scr_root);
     lv_obj_set_style_text_color(lbl_date, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(lbl_date, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(lbl_date, &lv_font_ft_22, 0);
     lv_label_set_text(lbl_date, "");
     lv_obj_align(lbl_date, LV_ALIGN_CENTER, 0, SY(-50));
 
@@ -700,7 +700,7 @@ lv_obj_t * screen_dim_create(void) {
 
     lbl_temp = lv_label_create(scr_root);
     lv_obj_set_style_text_color(lbl_temp, lv_color_hex(0xffffff), 0);
-    lv_obj_set_style_text_font(lbl_temp, &lv_font_montserrat_48, 0);
+    lv_obj_set_style_text_font(lbl_temp, &lv_font_ft_48, 0);
     lv_label_set_text(lbl_temp, "-- C");
     lv_obj_align(lbl_temp, LV_ALIGN_CENTER, 0, SY(45));
 
@@ -711,7 +711,7 @@ lv_obj_t * screen_dim_create(void) {
        On the short panel: smaller fonts for the secondary rows + a touch more
        spacing. Toon 2 (600 px) keeps its original fonts/layout. */
     lv_obj_set_style_text_font(lbl_setpoint,
-        DISP_VER < 600 ? &lv_font_montserrat_22 : &lv_font_montserrat_28, 0);
+        DISP_VER < 600 ? &lv_font_ft_22 : &lv_font_ft_28, 0);
     lv_label_set_text(lbl_setpoint, tr("naar -- C", "to -- C"));
     lv_obj_align(lbl_setpoint, LV_ALIGN_CENTER, 0, SY(115) + (DISP_VER < 600 ? 4 : 0));
 
@@ -721,7 +721,7 @@ lv_obj_t * screen_dim_create(void) {
     lbl_program = lv_label_create(scr_root);
     lv_obj_set_style_text_color(lbl_program, lv_color_hex(0xbbbbbb), 0);
     lv_obj_set_style_text_font(lbl_program,
-        DISP_VER < 600 ? &lv_font_montserrat_18 : &lv_font_montserrat_22, 0);
+        DISP_VER < 600 ? &lv_font_ft_18 : &lv_font_ft_22, 0);
     lv_label_set_text(lbl_program, "--");
     lv_obj_align(lbl_program, LV_ALIGN_CENTER, 0, SY(140) + (DISP_VER < 600 ? 14 : 0));
 
@@ -732,7 +732,7 @@ lv_obj_t * screen_dim_create(void) {
     lbl_metrics = lv_label_create(scr_root);
     lv_obj_set_style_text_color(lbl_metrics, lv_color_hex(0x888888), 0);
     lv_obj_set_style_text_font(lbl_metrics,
-        DISP_VER < 600 ? &lv_font_montserrat_18 : &lv_font_montserrat_22, 0);
+        DISP_VER < 600 ? &lv_font_ft_18 : &lv_font_ft_22, 0);
     lv_label_set_text(lbl_metrics, "");
     /* TVOC/CO2/CV row dropped lower into the gap between the thermostat mode and
      * the weather strip (user request). Toon 1 stays put — that panel is tight. */
@@ -742,7 +742,7 @@ lv_obj_t * screen_dim_create(void) {
        CH-heating shows "-> 90 C" (red). DHW shows the faucet+drop pair
        slightly to the left of where the text would be. Idle hides both. */
     lbl_burner = lv_label_create(scr_root);
-    lv_obj_set_style_text_font(lbl_burner, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(lbl_burner, &lv_font_ft_22, 0);
     lv_label_set_text(lbl_burner, "");
     lv_obj_align(lbl_burner, LV_ALIGN_CENTER, SX(80), SY(140));
     lv_obj_add_flag(lbl_burner, LV_OBJ_FLAG_HIDDEN);
@@ -790,7 +790,7 @@ lv_obj_t * screen_dim_create(void) {
 
     dim_lbl_water = lv_label_create(scr_root);
     lv_obj_set_style_text_color(dim_lbl_water, lv_color_hex(0x66bbff), 0);
-    lv_obj_set_style_text_font(dim_lbl_water, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(dim_lbl_water, &lv_font_ft_22, 0);
     lv_label_set_text(dim_lbl_water, "");
     lv_obj_align(dim_lbl_water, LV_ALIGN_CENTER, SX(175), SY(80));
     lv_obj_add_flag(dim_lbl_water, LV_OBJ_FLAG_HIDDEN);
@@ -818,7 +818,7 @@ lv_obj_t * screen_dim_create(void) {
 
     dim_vent_lbl = lv_label_create(scr_root);
     lv_obj_set_style_text_color(dim_vent_lbl, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(dim_vent_lbl, &lv_font_montserrat_18, 0);
+    lv_obj_set_style_text_font(dim_vent_lbl, &lv_font_ft_18, 0);
     lv_label_set_text(dim_vent_lbl, "-- %");
     lv_obj_set_style_text_align(dim_vent_lbl, LV_TEXT_ALIGN_CENTER, 0);
     lv_obj_set_width(dim_vent_lbl, SX(120));
@@ -830,7 +830,7 @@ lv_obj_t * screen_dim_create(void) {
        when text widths change. */
     lbl_outside_temp = lv_label_create(scr_root);
     lv_obj_set_style_text_color(lbl_outside_temp, lv_color_hex(0xffffff), 0);
-    lv_obj_set_style_text_font(lbl_outside_temp, &lv_font_montserrat_28, 0);
+    lv_obj_set_style_text_font(lbl_outside_temp, &lv_font_ft_28, 0);
     lv_label_set_text(lbl_outside_temp, "");
     lv_obj_set_width(lbl_outside_temp, SX(180));
     lv_obj_set_style_text_align(lbl_outside_temp, LV_TEXT_ALIGN_RIGHT, 0);
@@ -844,7 +844,7 @@ lv_obj_t * screen_dim_create(void) {
 
     lbl_outside = lv_label_create(scr_root);
     lv_obj_set_style_text_color(lbl_outside, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(lbl_outside, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(lbl_outside, &lv_font_ft_22, 0);
     lv_label_set_text(lbl_outside, tr("Buiten", "Outside"));
     /* "Buiten" sits directly UNDER the temperature (same right edge + width), as
      * in the custom dim — not centred low under the whole icon+temp cluster. */
@@ -857,7 +857,7 @@ lv_obj_t * screen_dim_create(void) {
      * names extend to the LEFT instead of clipping the bezel. */
     dim_lbl_life360_a = lv_label_create(scr_root);
     lv_obj_set_style_text_color(dim_lbl_life360_a, lv_color_hex(0x88aaff), 0);
-    lv_obj_set_style_text_font(dim_lbl_life360_a, &lv_font_montserrat_18, 0);
+    lv_obj_set_style_text_font(dim_lbl_life360_a, &lv_font_ft_18, 0);
     lv_obj_set_width(dim_lbl_life360_a, SX(340));
     lv_obj_set_style_text_align(dim_lbl_life360_a, LV_TEXT_ALIGN_RIGHT, 0);
     lv_label_set_long_mode(dim_lbl_life360_a, LV_LABEL_LONG_DOT);
@@ -867,7 +867,7 @@ lv_obj_t * screen_dim_create(void) {
 
     dim_lbl_life360_b = lv_label_create(scr_root);
     lv_obj_set_style_text_color(dim_lbl_life360_b, lv_color_hex(0xff88cc), 0);
-    lv_obj_set_style_text_font(dim_lbl_life360_b, &lv_font_montserrat_18, 0);
+    lv_obj_set_style_text_font(dim_lbl_life360_b, &lv_font_ft_18, 0);
     lv_obj_set_width(dim_lbl_life360_b, SX(340));
     lv_obj_set_style_text_align(dim_lbl_life360_b, LV_TEXT_ALIGN_RIGHT, 0);
     lv_label_set_long_mode(dim_lbl_life360_b, LV_LABEL_LONG_DOT);
@@ -894,7 +894,7 @@ lv_obj_t * screen_dim_create(void) {
 
     lbl_waste = lv_label_create(scr_root);
     lv_obj_set_style_text_color(lbl_waste, lv_color_hex(0xbbbbbb), 0);
-    lv_obj_set_style_text_font(lbl_waste, &lv_font_montserrat_22, 0);
+    lv_obj_set_style_text_font(lbl_waste, &lv_font_ft_22, 0);
     lv_obj_set_width(lbl_waste, SX(260));
     lv_obj_set_style_text_align(lbl_waste, LV_TEXT_ALIGN_CENTER, 0);
     lv_label_set_long_mode(lbl_waste, LV_LABEL_LONG_WRAP);
@@ -925,7 +925,7 @@ lv_obj_t * screen_dim_create(void) {
 
         dim_fc_day[i] = lv_label_create(scr_root);
         lv_obj_set_style_text_color(dim_fc_day[i], lv_color_hex(0xbbbbbb), 0);
-        lv_obj_set_style_text_font(dim_fc_day[i], &lv_font_montserrat_18, 0);
+        lv_obj_set_style_text_font(dim_fc_day[i], &lv_font_ft_18, 0);
         lv_label_set_text(dim_fc_day[i], "");
         lv_obj_set_style_text_align(dim_fc_day[i], LV_TEXT_ALIGN_CENTER, 0);
         lv_obj_set_width(dim_fc_day[i], col_w);
@@ -934,7 +934,7 @@ lv_obj_t * screen_dim_create(void) {
 
         dim_fc_temp[i] = lv_label_create(scr_root);
         lv_obj_set_style_text_color(dim_fc_temp[i], lv_color_hex(0xffffff), 0);
-        lv_obj_set_style_text_font(dim_fc_temp[i], &lv_font_montserrat_18, 0);
+        lv_obj_set_style_text_font(dim_fc_temp[i], &lv_font_ft_18, 0);
         lv_label_set_text(dim_fc_temp[i], "");
         lv_obj_set_style_text_align(dim_fc_temp[i], LV_TEXT_ALIGN_CENTER, 0);
         lv_obj_set_width(dim_fc_temp[i], col_w);
